@@ -1,8 +1,17 @@
 
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   return (
@@ -12,7 +21,7 @@ function App() {
           <h1 className="text-xl font-bold">Fever Monitoring System</h1>
         </header>
         <main className="container mx-auto p-4">
-          <p>Welcome to the Fever Monitoring System</p>
+          <RouterProvider router={router} />
         </main>
       </div>
     </QueryClientProvider>
